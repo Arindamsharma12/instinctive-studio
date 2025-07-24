@@ -1,0 +1,130 @@
+/* InteractiveTimeline.css */
+/* Main container */
+.timeline-container {
+  background-color: #1e1e1e;
+  padding: 10px 20px;
+  color: #e0e0e0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  user-select: none; /* Prevents text selection during drag */
+}
+
+.timeline-interactive-area {
+  position: relative;
+  cursor: pointer;
+}
+
+/* Ruler styles */
+.timeline-ruler {
+  display: flex;
+  border-bottom: 1px solid #444;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+.timeline-hour-marker {
+  flex: 1;
+  text-align: left;
+  font-size: 12px;
+  color: #888;
+  border-left: 1px solid #444;
+  padding-left: 5px;
+}
+
+.timeline-hour-marker:first-child {
+  border-left: none;
+}
+
+/* Scrubber styles */
+.timeline-scrubber {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none; /* Allows clicks to pass through */
+}
+
+.scrubber-line {
+  width: 2px;
+  background-color: #f3ca52; /* Yellow color from image */
+  flex-grow: 1;
+}
+
+.scrubber-time {
+  background-color: #f3ca52;
+  color: #111;
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  white-space: nowrap;
+  margin-bottom: 5px;
+}
+
+/* Camera rows and tracks */
+.timeline-body {
+  position: relative;
+}
+
+.timeline-camera-row {
+  display: flex;
+  align-items: center;
+  height: 45px; /* Increased height for better spacing */
+  border-bottom: 1px solid #333;
+}
+.timeline-camera-row:last-child {
+  border-bottom: none;
+}
+
+
+.camera-label {
+  padding-right: 15px;
+  font-size: 14px;
+  color: #ccc;
+  min-width: 100px;
+  font-weight: 500;
+}
+
+.incident-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Incident Marker styles */
+.incident-marker {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  color: white;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.incident-marker:hover {
+  border-color: #fff;
+}
+
+/* Example styles for different incident types */
+.incident-marker.unauthorised-access {
+  background-color: #8c4a00;
+  border-color: #d97706;
+}
+
+.incident-marker.face-recognised {
+  background-color: #1e40af;
+  border-color: #3b82f6;
+}
+
+.incident-marker.gun-threat {
+  background-color: #7f1d1d;
+  border-color: #dc2626;
+}
