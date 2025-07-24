@@ -4,8 +4,10 @@
   background-color: #1e1e1e;
   padding: 10px 20px;
   color: #e0e0e0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
   user-select: none; /* Prevents text selection during drag */
+  overflow-x: auto; /* Allows horizontal scrolling if needed on very small screens */
 }
 
 .timeline-interactive-area {
@@ -19,6 +21,7 @@
   border-bottom: 1px solid #444;
   padding-bottom: 5px;
   margin-bottom: 10px;
+  min-width: 1200px; /* Ensures ruler doesn't compress too much, relies on container's overflow */
 }
 
 .timeline-hour-marker {
@@ -49,7 +52,7 @@
 
 .scrubber-line {
   width: 2px;
-  background-color: #f3ca52; /* Yellow color from image */
+  background-color: #f3ca52; /* Yellow color */
   flex-grow: 1;
 }
 
@@ -67,18 +70,18 @@
 /* Camera rows and tracks */
 .timeline-body {
   position: relative;
+  min-width: 1200px; /* Match ruler width */
 }
 
 .timeline-camera-row {
   display: flex;
   align-items: center;
-  height: 45px; /* Increased height for better spacing */
+  height: 45px; /* Default height */
   border-bottom: 1px solid #333;
 }
 .timeline-camera-row:last-child {
   border-bottom: none;
 }
-
 
 .camera-label {
   padding-right: 15px;
@@ -127,4 +130,67 @@
 .incident-marker.gun-threat {
   background-color: #7f1d1d;
   border-color: #dc2626;
+}
+
+/* --- Responsive Design for Small Screens --- */
+@media (max-width: 768px) {
+  .timeline-container {
+    padding: 10px 15px;
+  }
+
+  .timeline-ruler,
+  .timeline-body {
+    min-width: 900px; /* Slightly reduce min-width for smaller viewports */
+  }
+
+  /* Stack camera label on top of the track */
+  .timeline-camera-row {
+    flex-direction: column;
+    align-items: flex-start;
+    height: 65px; /* Increase height to accommodate stacked layout */
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  .camera-label {
+    min-width: auto;
+    padding-right: 0;
+    padding-bottom: 8px; /* Space between label and track */
+    font-size: 13px; /* Slightly smaller font */
+    font-weight: 600;
+  }
+
+  .scrubber-time {
+    font-size: 11px; /* Make scrubber time smaller */
+    padding: 2px 5px;
+  }
+
+  .incident-marker {
+    font-size: 11px; /* Smaller font for markers */
+    padding: 3px 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .timeline-container {
+    padding: 5px 10px;
+  }
+
+  .timeline-ruler,
+  .timeline-body {
+    min-width: 800px; /* Further reduce for very small screens */
+  }
+
+  .timeline-hour-label {
+    font-size: 11px; /* Make ruler labels smaller */
+  }
+
+  /* Shorten the time format on the scrubber for very small screens */
+  .scrubber-time::after {
+    content: "";
+  }
+  .scrubber-time {
+    /* Hides the 'h' at the end and uses a more compact format from the JS */
+    /* Note: You might need a JS change for a truly different format */
+  }
 }
